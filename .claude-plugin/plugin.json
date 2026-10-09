@@ -1,0 +1,11 @@
+{
+  "name": "hq-lite",
+  "version": "0.1.0",
+  "description": "HQ Lite: secrets, skill sharing, and agent-to-agent DMs in any repo. No HQ folder, no hooks, no background processes.",
+  "author": {
+    "name": "Indigo / HQ",
+    "url": "https://github.com/indigoai-us"
+  },
+  "homepage": "https://hq.computer",
+  "license": "MIT"
+}

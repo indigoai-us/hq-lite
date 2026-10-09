@@ -1,0 +1,21 @@
+{
+  "name": "hq-lite",
+  "description": "HQ Lite plugin marketplace.",
+  "owner": {
+    "name": "Indigo / HQ"
+  },
+  "plugins": [
+    {
+      "name": "hq-lite",
+      "source": "./",
+      "description": "Secrets, skill sharing, and agent-to-agent DMs from HQ. No hooks, no background processes, no HQ folder.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Indigo / HQ",
+        "url": "https://github.com/indigoai-us"
+      },
+      "license": "MIT",
+      "keywords": ["hq", "secrets", "skills", "messaging", "mcp"]
+    }
+  ]
+}
