@@ -34,9 +34,16 @@ registered=()
 
 # 3. Claude Code + Claude desktop Code tab (plugin).
 if command -v claude >/dev/null 2>&1; then
+  # Installs made before the rename used the name hq-lite; remove them first so
+  # the same folder is not registered twice.
+  claude plugin uninstall hq-lite@hq-lite >/dev/null 2>&1 || true
+  claude plugin marketplace remove hq-lite >/dev/null 2>&1 || true
   claude plugin marketplace add "$DEST" >/dev/null 2>&1 || claude plugin marketplace update hqforwork >/dev/null 2>&1 || true
-  claude plugin install hqforwork@hqforwork >/dev/null 2>&1 || true
-  registered+=("Claude Code")
+  if claude plugin install hqforwork@hqforwork >/dev/null 2>&1 || claude plugin list 2>/dev/null | grep -q 'hqforwork@hqforwork'; then
+    registered+=("Claude Code")
+  else
+    echo "Could not install the hqforwork plugin in Claude Code. Run: claude plugin install hqforwork@hqforwork"
+  fi
 fi
 
 # 4. Claude desktop app (chat).

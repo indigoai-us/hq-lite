@@ -41,9 +41,12 @@ Restart the Claude desktop app and the Codex app after installing.
 ## What this plugin runs and calls
 
 - The MCP server is `mcp-server/server.mjs`. It is started by
-  `mcp-server/launch.sh`, a short shell script that adds common Node
-  install locations to PATH and then runs `node server.mjs`. It downloads
-  nothing and runs no other program.
+  `mcp-server/launch.sh`, a short shell script that loads the PATH saved at
+  install time from `~/.hq-lite/env`, adds common Node install locations, and
+  runs `node server.mjs`. Nothing is downloaded at start.
+- The server runs these programs: `hq auth refresh` to renew your HQ
+  sign-in, `bash scripts/doctor.sh` when you call the `lite_doctor` tool, and the
+  command you pass to `secrets_exec`. It runs nothing else.
 - The server calls HQ's API at `https://hqapi.hq.computer` using your own HQ
   sign-in. Set `HQ_VAULT_API_URL` to point it elsewhere and `HQ_LITE_COMPANY`
   to pick a company.
