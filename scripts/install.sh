@@ -12,7 +12,7 @@ SRC="$(cd "$(dirname "$0")/.." && pwd)"
 DEST="$HOME/.hq-lite"
 
 command -v node >/dev/null || { echo "Node.js 20+ is required (https://nodejs.org)."; exit 1; }
-command -v hq >/dev/null || { echo "Installing the hq CLI..."; npm i -g @indigoai-us/hq-cli >/dev/null; }
+command -v hq >/dev/null || { echo "Installing the hq CLI..."; npm i -g @indigoai-us/hq-cli@5.345.173 >/dev/null; }
 
 # 1. Stable copy + PATH snapshot so desktop apps can find node and hq.
 if [ "$SRC" != "$DEST" ]; then
@@ -34,8 +34,8 @@ registered=()
 
 # 3. Claude Code + Claude desktop Code tab (plugin).
 if command -v claude >/dev/null 2>&1; then
-  claude plugin marketplace add "$DEST" >/dev/null 2>&1 || claude plugin marketplace update hq-lite >/dev/null 2>&1 || true
-  claude plugin install hq-lite@hq-lite >/dev/null 2>&1 || true
+  claude plugin marketplace add "$DEST" >/dev/null 2>&1 || claude plugin marketplace update hqforwork >/dev/null 2>&1 || true
+  claude plugin install hqforwork@hqforwork >/dev/null 2>&1 || true
   registered+=("Claude Code")
 fi
 

@@ -16,6 +16,12 @@ Requirements: Node.js 20+, an HQ account in at least one company, and any of: Cl
 git clone https://github.com/indigoai-us/hq-lite && bash hq-lite/scripts/install.sh
 ```
 
+Or, in Claude Code 2.1.275 or later:
+
+```
+/plugin install hqforwork --marketplace indigoai-us/hq-lite
+```
+
 To message teammates or share skills, you and they need to be in the same HQ company. Create a free one at https://hq.computer and invite them by email.
 
 The installer:
@@ -23,7 +29,7 @@ The installer:
 1. Installs the `hq` CLI if missing and signs you in.
 2. Copies HQ Lite to `~/.hq-lite` and saves your PATH so desktop apps can find `node` and `hq`.
 3. Registers the MCP server with every agent app it finds:
-   - Claude Code and the Claude desktop Code tab, as the `hq-lite` plugin
+   - Claude Code and the Claude desktop Code tab, as the `hqforwork` plugin
    - The Claude desktop app, in `claude_desktop_config.json`
    - Codex CLI and the Codex app, in `~/.codex/config.toml`, plus the `hq-lite` guide skill in `~/.codex/skills`
 4. Runs the doctor.
@@ -31,6 +37,21 @@ The installer:
 Restart the Claude desktop app and the Codex app after installing.
 
 `skill_install` writes shared skills to `~/.claude/skills` and, when Codex is installed, `~/.codex/skills`. Pass `target: "claude"` or `target: "codex"` to pick one. The Claude desktop chat app can use the tools but does not load skills from disk.
+
+## What this plugin runs and calls
+
+- The MCP server is `mcp-server/server.mjs`. It is started by
+  `mcp-server/launch.sh`, a short shell script that adds common Node
+  install locations to PATH and then runs `node server.mjs`. It downloads
+  nothing and runs no other program.
+- The server calls HQ's API at `https://hqapi.hq.computer` using your own HQ
+  sign-in. Set `HQ_VAULT_API_URL` to point it elsewhere and `HQ_LITE_COMPANY`
+  to pick a company.
+- `scripts/install.sh` is run by you, once, by hand. It is not a hook. If the
+  `hq` command is missing it installs the `@indigoai-us/hq-cli` package
+  globally with npm, then registers the server with the agent apps it finds.
+- Secret values never pass through the agent. `secrets_exec` injects them
+  into the command it runs.
 
 ## Tools
 
