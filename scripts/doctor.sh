@@ -27,7 +27,7 @@ say "HQ hooks in Codex settings:" "$chooks"
 
 # 1c. Where HQ Lite is registered.
 where=""
-grep -q '"hq-lite@hq-lite"' "$HOME/.claude/settings.json" 2>/dev/null && where="$where Claude-Code"
+grep -qE '"(hqforwork@hqforwork|hq-lite@hq-lite)"' "$HOME/.claude/settings.json" 2>/dev/null && where="$where Claude-Code"
 grep -q '"hq-lite"' "$HOME/Library/Application Support/Claude/claude_desktop_config.json" 2>/dev/null && where="$where Claude-desktop"
 grep -q '^\[mcp_servers.hq-lite\]' "$HOME/.codex/config.toml" 2>/dev/null && where="$where Codex"
 say "HQ Lite registered in:" "${where:- nowhere}"

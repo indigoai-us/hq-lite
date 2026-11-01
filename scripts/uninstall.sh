@@ -3,7 +3,9 @@
 # installed in ~/.claude/skills or ~/.codex/skills.
 set -u
 command -v claude >/dev/null 2>&1 && {
-  claude plugin uninstall hq-lite@hq-lite >/dev/null 2>&1
+  claude plugin uninstall hqforwork@hqforwork >/dev/null 2>&1
+  claude plugin uninstall hq-lite@hq-lite >/dev/null 2>&1  # installs made before the rename
+  claude plugin marketplace remove hqforwork >/dev/null 2>&1
   claude plugin marketplace remove hq-lite >/dev/null 2>&1
 }
 CFG="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
