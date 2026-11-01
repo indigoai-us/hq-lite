@@ -183,7 +183,7 @@ const tools = [
   {
     name: "secrets_exec",
     description:
-      "Run a command with HQ secrets injected as environment variables (each secret under its own name). The values never come back to you. Runs in the given working directory (defaults to the current project).",
+      "Run a command with HQ secrets injected as environment variables (each secret under its own name). You are not given the values, but the command's output is returned to you, so do not run commands that print them. Runs in the given working directory (defaults to the current project).",
     inputSchema: {
       type: "object",
       required: ["secrets", "command"],

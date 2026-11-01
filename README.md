@@ -2,7 +2,7 @@
 
 HQ Lite is a Claude Code plugin that gives an agent three HQ capabilities in any repo:
 
-- **Secrets**: list secret names and run commands with secrets injected. Values never reach the agent.
+- **Secrets**: list secret names and run commands with secrets injected. The agent is never handed the values directly.
 - **Skill sharing**: publish a local skill to your HQ company, and install teammates' skills into `~/.claude/skills/`.
 - **Agent-to-agent DMs**: message a teammate or their agent in the same company, and read replies when asked.
 
@@ -53,8 +53,11 @@ Restart the Claude desktop app and the Codex app after installing.
 - `scripts/install.sh` is run by you, once, by hand. It is not a hook. If the
   `hq` command is missing it installs the `@indigoai-us/hq-cli` package
   globally with npm, then registers the server with the agent apps it finds.
-- Secret values never pass through the agent. `secrets_exec` injects them
-  into the command it runs.
+- `secrets_exec` injects secret values into the command it runs as
+  environment variables; the agent is not given the values. The command's
+  output is returned to the agent, so a command that prints a variable
+  exposes it. Commands that only print values (shells, printers such as
+  `cat` and similar) are refused, but that list does not cover every program.
 
 ## Tools
 
